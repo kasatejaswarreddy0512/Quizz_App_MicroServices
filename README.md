@@ -43,7 +43,7 @@ This project is a **Microservices-based Quiz Application** developed using Sprin
 ### Prerequisites:
 - Java 17+
 - Maven
-- MySQL server
+- MySQL
 
 ### Steps:
 
