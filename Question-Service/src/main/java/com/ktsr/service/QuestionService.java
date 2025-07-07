@@ -34,8 +34,9 @@ public class QuestionService {
     }
 
     //Get Question for Quiz
-    public List<Long> getQuestionsForQuiz(String category, Long numQuestions) {
-        return questionRepository.findRandomQuestionsByCategory(category,numQuestions);
+    public ResponseEntity<List<Long>> getQuestionsForQuiz(String categoryName, Long numQuestions) {
+        List<Long> questions = questionRepository.findRandomQuestionsByCategory(categoryName, numQuestions);
+        return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 
 

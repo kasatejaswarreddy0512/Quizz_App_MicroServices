@@ -5,6 +5,8 @@ import com.ktsr.model.QuestionWrapper;
 import com.ktsr.model.Response;
 import com.ktsr.service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ import java.util.List;
 public class QuestionController {
 
     private final QuestionService questionService;
+
+    @Autowired
+    Environment environment;
 
     @PostMapping("add")
     public ResponseEntity<Question> addQuestion(@RequestBody Question question){
@@ -35,12 +40,13 @@ public class QuestionController {
 
     @GetMapping("generate")
     public ResponseEntity<List<Long>> getQuestionsForQuiz
-            (@RequestParam String category, @RequestParam Long numQuestions){
-        return ResponseEntity.ok(questionService.getQuestionsForQuiz(category,numQuestions));
+            (@RequestParam String categoryName, @RequestParam Long numQuestions){
+        return ResponseEntity.ok(questionService.getQuestionsForQuiz(categoryName,numQuestions).getBody());
     }
 
     @PostMapping("getQuestions")
     public ResponseEntity<List<QuestionWrapper>> getQuestionsFromIds(@RequestBody List<Long> questionsIds){
+        System.out.println(environment.getProperty("local.server.port"));
         return ResponseEntity.ok(questionService.getQuestionFromIds(questionsIds));
     }
 
