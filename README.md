@@ -49,4 +49,4 @@ This project is a **Microservices-based Quiz Application** developed using Sprin
 
 1. **Clone the repository**
    ```bash
-   https://github.com/kasatejaswarreddy0512/Quizz_App_MicroServices
+   git clone https://github.com/kasatejaswarreddy0512/Quizz_App_MicroServices
