@@ -62,7 +62,7 @@ public class QuestionService {
         return wrappers;
 
     }
-
+    // Get Score from Responses
     public Long getScore(List<Response> responses) {
         long right=0;
 

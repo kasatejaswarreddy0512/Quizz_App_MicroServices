@@ -24,17 +24,20 @@ public class QuizService {
     @Autowired
     QuizInterface quizInterface;
 
+
+    // Create a new quiz
     public ResponseEntity<String> createQuiz(String categoryName, Long numQ, String title){
-        List<Long>  questuions=quizInterface.getQuestionsForQuiz(categoryName,numQ).getBody();
+        List<Long>  questions=quizInterface.getQuestionsForQuiz(categoryName,numQ).getBody();
 
         Quiz quiz= new Quiz();
         quiz.setTitle(title);
-        quiz.setQuestionIds(questuions);
+        quiz.setQuestionIds(questions);
         quizRepository.save(quiz);
 
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
+    // Get questions for a quiz by ID
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(Long id){
         Quiz quiz= quizRepository.findById(id).get();
 
@@ -43,6 +46,8 @@ public class QuizService {
         return questions;
     }
 
+
+    // Calculate the result of a quiz based on responses
     public ResponseEntity<Long> calculateResult(Long id, List<Response> responses){
         ResponseEntity<Long> score= quizInterface.getScore(responses);
         return score;
